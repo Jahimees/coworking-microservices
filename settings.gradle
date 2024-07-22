@@ -1,0 +1,4 @@
+rootProject.name = 'coworking-microservices'
+
+includeBuild 'eureka-server'
+
