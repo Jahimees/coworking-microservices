@@ -1,8 +1,8 @@
 package by.jahimees.coworking.authservice.controller;
 
 import by.jahimees.coworking.authservice.data.User;
-import by.jahimees.coworking.authservice.dto.JwtRequest;
-import by.jahimees.coworking.authservice.dto.JwtResponse;
+import by.jahimees.coworking.authservice.data.dto.JwtRequest;
+import by.jahimees.coworking.authservice.data.dto.JwtResponse;
 import by.jahimees.coworking.authservice.service.JwtTokenService;
 import by.jahimees.coworking.authservice.service.CookieService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,7 +27,7 @@ public class AuthenticationController {
     private final CookieService cookieService;
 
     @PreAuthorize(value = "permitAll()")
-    @PostMapping("/api/v1/auth")
+    @PostMapping("/v1/auth")
     public ResponseEntity<?> authenticate(@RequestBody JwtRequest jwtRequest, HttpServletResponse response) {
         Authentication auth;
 

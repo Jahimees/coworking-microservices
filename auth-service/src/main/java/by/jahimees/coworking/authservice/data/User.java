@@ -23,6 +23,8 @@ public class User implements UserDetails {
     private String password;
     @Column(name = "email")
     private String email;
+    @Column(name = "status")
+    private String status;
 
     @ManyToMany
     @JoinTable(
