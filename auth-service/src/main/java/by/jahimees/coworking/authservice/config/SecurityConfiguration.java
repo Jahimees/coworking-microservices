@@ -25,7 +25,6 @@ public class SecurityConfiguration {
 
     private final UserService userService;
     private final JwtRequestFilter jwtRequestFilter;
-    private final TokenCookieSessionAuthenticationStrategy tokenCookieSessionAuthenticationStrategy;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -42,7 +41,6 @@ public class SecurityConfiguration {
                         authz.anyRequest().permitAll()
                 )
                 .sessionManagement(sessionManagement -> {
-                    sessionManagement.sessionAuthenticationStrategy(tokenCookieSessionAuthenticationStrategy);
                     sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
                 })
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

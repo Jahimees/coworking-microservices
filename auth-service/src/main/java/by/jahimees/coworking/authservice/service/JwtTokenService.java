@@ -1,4 +1,4 @@
-package by.jahimees.coworking.authservice.jwt;
+package by.jahimees.coworking.authservice.service;
 
 import by.jahimees.coworking.authservice.data.Role;
 import by.jahimees.coworking.authservice.data.User;
@@ -18,7 +18,7 @@ import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
-public class JwtTokenUtils {
+public class JwtTokenService {
 
     @Value("${token.lifetime}")
     private Duration lifetime;

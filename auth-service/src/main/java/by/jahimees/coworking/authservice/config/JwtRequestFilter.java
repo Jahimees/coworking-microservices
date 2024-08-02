@@ -1,6 +1,6 @@
 package by.jahimees.coworking.authservice.config;
 
-import by.jahimees.coworking.authservice.jwt.JwtTokenUtils;
+import by.jahimees.coworking.authservice.service.JwtTokenService;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
@@ -22,7 +22,7 @@ import java.io.IOException;
 @Slf4j
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    private final JwtTokenUtils jwtTokenUtils;
+    private final JwtTokenService jwtTokenService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -34,7 +34,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             jwt = authorizationHeader.substring(7);
 
             try {
-                username = jwtTokenUtils.getUsernameFromToken(jwt);
+                username = jwtTokenService.getUsernameFromToken(jwt);
             } catch (ExpiredJwtException e) {
                 log.debug(e.getMessage());
             } catch (SignatureException e) {
@@ -44,7 +44,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                         username, null,
-                        jwtTokenUtils.getRolesFromToken(jwt).stream().map(SimpleGrantedAuthority::new).toList());
+                        jwtTokenService.getRolesFromToken(jwt).stream().map(SimpleGrantedAuthority::new).toList());
 
                 SecurityContextHolder.getContext().setAuthentication(token);
 
