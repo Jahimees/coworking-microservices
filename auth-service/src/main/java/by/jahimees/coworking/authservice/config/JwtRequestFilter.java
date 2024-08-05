@@ -1,6 +1,6 @@
 package by.jahimees.coworking.authservice.config;
 
-import by.jahimees.coworking.authservice.service.JwtTokenService;
+import by.jahimees.coworking.authservice.service.jwt.JwtTokenService;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;

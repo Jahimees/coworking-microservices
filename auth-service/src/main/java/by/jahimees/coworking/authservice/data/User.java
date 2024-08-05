@@ -1,16 +1,20 @@
 package by.jahimees.coworking.authservice.data;
 
+import by.jahimees.coworking.authservice.data.dto.UserDto;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "users")
+@NoArgsConstructor
 public class User implements UserDetails {
 
     @Id
@@ -19,6 +23,10 @@ public class User implements UserDetails {
     private Integer id;
     @Column(name = "username")
     private String username;
+
+    /**
+     * !Encrypted password!
+     */
     @Column(name = "password")
     private String password;
     @Column(name = "email")
@@ -33,6 +41,15 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private List<Role> roles;
+
+    public User(UserDto userDto) {
+        this.id = userDto.getId();
+        this.username = userDto.getUsername();
+        this.email = userDto.getEmail();
+
+        roles = new ArrayList<>();
+        userDto.getRoles().forEach(roleDto -> roles.add(new Role(roleDto)));
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

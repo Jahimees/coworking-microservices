@@ -1,14 +1,15 @@
 package by.jahimees.coworking.authservice.data;
 
+import by.jahimees.coworking.authservice.data.dto.RoleDto;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-
-import java.util.Collection;
 
 @Data
 @Entity
 @Table(name = "roles")
+@NoArgsConstructor
 public class Role implements GrantedAuthority {
 
     @Id
@@ -18,6 +19,11 @@ public class Role implements GrantedAuthority {
 
     @Column(name = "name")
     private String name;
+
+    public Role(RoleDto roleDto) {
+        this.id = roleDto.getId();
+        this.name = roleDto.getName();
+    }
 
     @Override
     public String getAuthority() {

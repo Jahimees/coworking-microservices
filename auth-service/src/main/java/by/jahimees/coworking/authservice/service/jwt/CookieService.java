@@ -1,4 +1,4 @@
-package by.jahimees.coworking.authservice.service;
+package by.jahimees.coworking.authservice.service.jwt;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.Cookie;

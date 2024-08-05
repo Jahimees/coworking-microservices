@@ -27,7 +27,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public User createUser(User user) throws UsernameAlreadyExistsException, NotEnoughRegistrationData,
+    public User create(User user) throws UsernameAlreadyExistsException, NotEnoughRegistrationData,
             EmailAlreadyExistsException {
         if (user.getUsername() == null || user.getUsername().isEmpty()
                 || user.getPassword() == null || user.getPassword().isEmpty()
