@@ -1,0 +1,12 @@
+.block-center {
+    display: block;
+    margin: 0 auto;
+}
+
+.m-b-3em {
+    margin-bottom: 3em;
+}
+
+.m-t-5em {
+    margin-top: 5em;
+}

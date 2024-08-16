@@ -11,3 +11,103 @@
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>GoCow</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:200,400,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" th:href="@{style/common.css}">
+    <link rel="stylesheet" th:href="@{style/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{style/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{style/demo.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{style/header.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{style/main.css}"/>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+<header id="large-header" class="large-header">
+    <canvas id="demo-canvas"></canvas>
+    <div class="center-header-block">
+        <h1>GoCow</h1>
+        <div>Программное средство для бла бла бла бла бла</div>
+    </div>
+    <div class="right-header-block">
+        <a class="header-btn" href="#">
+            Авторизация
+        </a>
+        <a class="header-btn" href="#">
+            Регистрация
+        </a>
+    </div>
+</header>
+<div class="w-50 main-body">
+    <div class="m-b-3em">
+        <h1 class="main-body-header">
+            GoCow: Разделяй работу и дом!
+        </h1>
+        <p>Наше средство поможет Вам более эффективно управлять рабочим пространством в любой сфере:</p>
+        <ul>
+            <li>Коворкинг</li>
+            <li>Аренда помещений</li>
+            <li>Занятие переговорных комнат в офисе</li>
+        </ul>
+    </div>
+    <div class="m-b-3em">
+        <h1 class="main-body-header">
+            Отслеживайте занятость помещений
+        </h1>
+        <p>
+            Вы можете наблюдать за тем, какие помещения заняты/арендованы, отслеживать, когда
+            появится свободное место, а также когда должна быть произведена оплата на продление.
+        </p>
+        <p>
+            Помимо всего прочего, ваши клиенты или сотрудники также могут арендовать/занимать помещения
+            для своих нужд от занятия переговорной комнаты до аренды целого помещения на долгий срок!
+        </p>
+        <img th:src="@{image/main-office-plan.jpg}"/>
+    </div>
+    <div class="m-b-3em">
+        <h1 class="main-body-header">
+            Быстро, надежно
+        </h1>
+        <p>
+            Оплата за пользование помещений происходит быстро и надежно. Наш сервис использует
+            готовые надежные решения по оплате, что обеспечивает безопасность платежных данных клиента.
+        </p>
+    </div>
+    <div class="m-b-3em">
+        <h1 class="main-body-header">
+            Низкие комиссии
+        </h1>
+        <p>
+            Мы берем всего 1% от ваших сделок! Либо 30 рублей в месяц в случае, если ваше пространство - это офис
+        </p>
+        <div id="counter">
+            Счётчик: {{ counter }}
+        </div>
+    </div>
+</div>
+<div th:insert="footer :: footer"></div>
+
+<script th:src="@{script/TweenLite.min.js}"></script>
+<script th:src="@{script/EasePack.min.js}"></script>
+<script th:src="@{script/rAF.js}"></script>
+<script th:src="@{script/demo-1.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossOrigin="anonymous"></script>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
