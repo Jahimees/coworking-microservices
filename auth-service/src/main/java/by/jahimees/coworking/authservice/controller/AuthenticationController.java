@@ -1,10 +1,10 @@
 package by.jahimees.coworking.authservice.controller;
 
 import by.jahimees.coworking.authservice.data.User;
-import by.jahimees.coworking.authservice.data.dto.JwtRequest;
 import by.jahimees.coworking.authservice.data.dto.JwtResponse;
-import by.jahimees.coworking.authservice.service.jwt.JwtTokenService;
+import by.jahimees.coworking.authservice.data.dto.UserDto;
 import by.jahimees.coworking.authservice.service.jwt.CookieService;
+import by.jahimees.coworking.authservice.service.jwt.JwtTokenService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,12 +28,12 @@ public class AuthenticationController {
 
     @PreAuthorize(value = "permitAll()")
     @PostMapping("/v1/auth")
-    public ResponseEntity<?> authenticate(@RequestBody JwtRequest jwtRequest, HttpServletResponse response) {
+    public ResponseEntity<?> authenticate(@RequestBody UserDto userDto, HttpServletResponse response) {
         Authentication auth;
 
         try {
             auth = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(jwtRequest.getUsername(), jwtRequest.getPassword()));
+                    new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getRawPassword()));
         } catch (BadCredentialsException e) {
             return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
         }

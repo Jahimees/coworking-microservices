@@ -1,18 +1,39 @@
+@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'codropsicons';
+    src:url('../fonts/codropsicons/codropsicons.eot');
+    src:url('../fonts/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/codropsicons/codropsicons.woff') format('woff'),
+    url('../fonts/codropsicons/codropsicons.ttf') format('truetype'),
+    url('../fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');
+}
+
+*, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
+.clearfix:before, .clearfix:after { content: ''; display: table; }
+.clearfix:after { clear: both; }
+
 /* Header */
 .large-header {
     position: relative;
     width: 100%;
     background:
             linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.0)),
-            url(../image/header-back.jpg);
+            url(images/header-back.jpg);
     overflow: hidden;
     background-size: cover;
     background-position: center center;
     z-index: 1;
+
+    font-family: 'Raleway', Calibri, Arial, sans-serif;
+    font-weight: 400;
+    color: #383a3c;
+    font-size: 1em;
+    line-height: 1.25;
 }
 
 .header-btn {
-    padding-left: 20px;
+    margin-left: 20px;
     color: white;
     font-weight: bold;
     transition: color 0.3s;
@@ -24,7 +45,7 @@
 }
 
 .demo-1 .large-header {
-    background-image: url('../image/header-back.jpg');
+    background-image: url('images/header-back.jpg');
 }
 
 .right-header-block {
@@ -52,51 +73,10 @@
     transform: translate3d(-50%, -50%, 0);
 }
 
-.demo-1 .right-header-block,
-.demo-3 .right-header-block {
+.demo-1 .right-header-block {
     text-transform: uppercase;
     font-size: 4.2em;
     letter-spacing: 0.1em;
-}
-
-.demo-2 .right-header-block {
-    font-family: 'Clicker Script', cursive;
-    font-weight: normal;
-    font-size: 8em;
-    padding-left: 10px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.demo-2 .right-header-block::before {
-    content: '';
-    width: 20vw;
-    height: 20vw;
-    min-width: 3.5em;
-    min-height: 3.5em;
-    background: url(../img/deco.svg) no-repeat center center;
-    background-size: cover;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    border-radius: 50%;
-    z-index: -1;
-    -webkit-transform: translate3d(-50%, -50%, 0);
-    transform: translate3d(-50%, -50%, 0);
-}
-
-.demo-3 .right-header-block {
-    padding: 10px 40px;
-    border: 10px double #f9f1e9;
-    text-transform: uppercase;
-    font-family: Londrina Outline, sans-serif;
-}
-
-.demo-4 .right-header-block {
-    font-size: 6em;
-    font-weight: 300;
-    padding: 10px 30px;
-    text-transform: uppercase;
-    color: #222;
 }
 
 .right-header-block .thin {
@@ -104,13 +84,9 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .demo-1 .right-header-block,
-    .demo-3 .right-header-block,
-    .demo-4 .right-header-block {
+    .demo-1 .right-header-block {
         font-size: 3em;
     }
 
-    .demo-2 .right-header-block {
-        font-size: 4em;
-    }
+
 }

@@ -1,6 +1,7 @@
 .block-center {
     display: block;
     margin: 0 auto;
+    text-align: center;
 }
 
 .m-b-3em {
@@ -9,4 +10,14 @@
 
 .m-t-5em {
     margin-top: 5em;
+}
+
+.m-tb-5em {
+    margin-top: 5em;
+    margin-bottom: 5em;
+}
+
+.p-tb-3em {
+    padding-top: 3em;
+    padding-bottom: 3em;
 }

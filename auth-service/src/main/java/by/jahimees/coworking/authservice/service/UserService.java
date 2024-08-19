@@ -37,7 +37,7 @@ public class UserService implements UserDetailsService {
 
         checkUserExistence(user);
 
-        return userRepository.save(user);
+        return userRepository.saveAndFlush(user);
     }
 
     @Override
