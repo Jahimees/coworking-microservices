@@ -1,4 +1,4 @@
-package by.jahimees.coworking.authservice.service;
+package by.jahimees.coworking.authservice.service.converter;
 
 import by.jahimees.coworking.authservice.data.Role;
 import by.jahimees.coworking.authservice.data.User;
@@ -42,9 +42,11 @@ public class UserDtoConverter {
         user.setEmail(userDto.getEmail());
 
         List<Role> roleList = new ArrayList<>();
-        userDto.getRoles().forEach(role -> roleList.add(roleDtoConverter.convertToEntity(role)));
+        if (userDto.getRoles() != null) {
+            userDto.getRoles().forEach(role -> roleList.add(roleDtoConverter.convertToEntity(role)));
 
-        user.setRoles(roleList);
+            user.setRoles(roleList);
+        }
 
         return user;
     }
