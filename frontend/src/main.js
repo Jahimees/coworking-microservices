@@ -14,6 +14,8 @@ import {createApp} from 'vue'
 import App from './App.vue'
 import AuthView from "@/components/views/AuthView.vue";
 import HomeView from "@/components/views/HomeView.vue";
+import DrawPanelView from "@/components/views/DrawPanelView.vue";
+
 import {createRouter, createWebHistory} from "vue-router";
 
 const router = createRouter({
@@ -25,7 +27,12 @@ const router = createRouter({
         {
             path: "/auth",
             component: AuthView
-        }],
+        },
+        {
+            path: "/draw",
+            component: DrawPanelView
+        }
+    ],
     history: createWebHistory()
 })
 
