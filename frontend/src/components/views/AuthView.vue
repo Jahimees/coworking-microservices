@@ -1,9 +1,12 @@
 <script setup>
 
 import {ref} from "vue";
+import Utils from '@/scripts/Utils.js'
 
-const username = ref("sadf")
-const rawPassword = ref("sdf")
+const username = ref("")
+const rawPassword = ref("")
+
+const wrongCredsErr = ref(false)
 
 async function authorize() {
   const userDto = {
@@ -11,9 +14,7 @@ async function authorize() {
     rawPassword: rawPassword.value
   }
 
-  console.log(userDto)
-  console.log(JSON.stringify(userDto))
-  const response = await (await fetch("http://localhost:8765/auth-service/api/v1/auth",
+  fetch("http://localhost:8765/auth-service/api/v1/auth",
       {
         method: "POST",
         body: JSON.stringify(userDto),
@@ -22,14 +23,52 @@ async function authorize() {
         },
         crossDomain: true
       }
-  )).json();
+  )
+      .then(async (response) => {
+        if (response.ok) {
+          return response.json();
+        }
 
+        const responseText = await response.text()
+
+        wrongCredsErr.value = false
+
+        switch (responseText) {
+          case "Имя пользователя или пароль неверные": {
+            wrongCredsErr.value = true
+          }
+        }
+
+        throw Error("Credentials are wrong")
+      })
+      .then((responseJson) => {
+        document.cookie = "_at=" + responseJson.token + "; max-age=1800"
+        document.location.href = '/?i=auth'
+      })
+      .catch((error) => {
+        console.log(error)
+      });
 }
 
+function test() {
+  fetch("http://localhost:8765/auth-service/api/v1/test",
+      {
+        headers: {
+          Authorization: "Bearer " + Utils.getCookie("_at")
+        }
+      })
+      .then(async (response) => {
+
+        console.log(await response.text())
+      })
+}
 </script>
 
 <template>
-  <div class="w-75 p-tb-3em m-t-5em block-center">
+  <a class="block-center m-t-3em" href="/"><img src="@/assets/images/logo.png"></a>
+  <div class="block-center">На главную</div>
+  <div class="w-100 p-tb-3em m-t-5em block-center">
+    <h1 class="block-center">GoCow Авторизация</h1>
     <div class="block-center">
       <div class="lbl-field">Имя пользователя</div>
       <input name="username" v-model="username">
@@ -41,7 +80,15 @@ async function authorize() {
     <div>
       <button @click="authorize">Авторизоваться</button>
     </div>
+    <hr>
+    <div class="block-center" style="color: white">Еще нет аккаунта?
+      <a style="color: white" href="/reg">
+        <b>Зарегистрироваться</b>
+      </a>
+    </div>
   </div>
+
+  <button @click="test">тест</button>
 </template>
 
 <style scoped>
@@ -81,10 +128,28 @@ button:hover {
   color: white;
 }
 
-.w-75 {
-  background-image: url('@/assets/images/header-back.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+.w-100 {
+  background: linear-gradient(90deg, rgba(168, 162, 255, 0.6811099439775911) 0%, rgba(42, 42, 255, 0.4682247899159664) 49%, rgba(0, 212, 255, 0.5886729691876751) 100%);
+}
+
+h1 {
+  font-size: 4em;
+  margin: 0.3em 0;
+  color: white;
+  font-family: 'Raleway', Calibri, Arial, sans-serif;
+}
+
+img {
+  width: 100px;
+  cursor: pointer;
+}
+
+img:hover {
+  transform: rotate(360deg);
+  transition: all 1s;
+}
+
+a.block-center:hover {
+  background: none;
 }
 </style>

@@ -2,6 +2,13 @@
 
 import FooterComp from "@/components/FooterComp.vue";
 import HeaderComp from "@/components/HeaderComp.vue";
+import Utils from "@/scripts/Utils.js"
+
+import {onMounted} from "vue";
+
+onMounted(() => {
+  Utils.doInfoAction()
+})
 </script>
 
 <template>

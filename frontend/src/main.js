@@ -6,7 +6,7 @@ import './assets/base.css'
 
 import './scripts/TweenLite.min.js'
 import './scripts/EasePack.min.js'
-import './scripts/Neurolinks.js'
+import "./scripts/Utils.js"
 
 
 // import "http://html5shiv.googlecode.com/svn/trunk/html5.js"

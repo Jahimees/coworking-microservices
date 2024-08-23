@@ -37,7 +37,7 @@ public class AuthenticationController {
             auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getRawPassword()));
         } catch (BadCredentialsException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
+            return ResponseEntity.badRequest().body("Имя пользователя или пароль неверные");
         }
 
         String token = jwtTokenService.createToken((User) auth.getPrincipal());

@@ -14,9 +14,9 @@ public class TestController {
 
 
     @GetMapping("/api/v1/test")
-    @PreAuthorize(value = "permitAll()")
+    @PreAuthorize(value = "isAuthenticated()")
     public ResponseEntity<?> test(HttpServletRequest request) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        return ResponseEntity.ok("FASFAS");
+        return ResponseEntity.ok(request.getCookies());
     }
 }
