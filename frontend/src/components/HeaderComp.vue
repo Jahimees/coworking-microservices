@@ -19,7 +19,7 @@ onMounted(() => {
       <a class="header-btn" href="/auth">
         Авторизация
       </a>
-      <a class="header-btn" href="#">
+      <a class="header-btn" href="/reg">
         Регистрация
       </a>
     </div>

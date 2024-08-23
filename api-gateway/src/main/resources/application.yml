@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+      - id: auth-service
+        uri: lb://auth-service
+        predicates:
+          - Path=/auth-service/api/v1/**
+          - Method=POST,GET
+
+#        metadata:
+#          cors:
+#            allowedOrigins: "http://localhost:5173"
+#            allowedMethods:
+#              - GET
+#              - POST
+#              - DELETE
+#              - PUT
+#              - PATCH
+#            allowedHeaders: '*'
+
+#      globalcors:
+#        cors-configurations:
+#          '[/**]':
+
+
+  #  spring.cloud.gateway.routes[0].id=auth-service
+#  spring.cloud.gateway.routes[0].uri=
+#  spring.cloud.gateway.routes[0].predicates[0]=Path=
+  
+#  spring.cloud.gateway.globalcors.cors-configurations.'[/**]'.allowed-origins[0]=
+#  spring.cloud.gateway.globalcors.cors-configurations.'[/**]'.allowed-methods[0]=
+
+server:
+  ssl:
+    enabled: false
+  port: 8765
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+logging:
+  level:
+    org:
+      springframework:
+        security: trace
+  pattern:
+    console: "%C{1.} [%-5level] %d{HH:mm:ss} - %msg%n"

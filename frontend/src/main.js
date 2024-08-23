@@ -13,6 +13,7 @@ import './scripts/Neurolinks.js'
 import {createApp} from 'vue'
 import App from './App.vue'
 import AuthView from "@/components/views/AuthView.vue";
+import RegView from "@/components/views/RegView.vue";
 import HomeView from "@/components/views/HomeView.vue";
 import DrawPanelView from "@/components/views/DrawPanelView.vue";
 
@@ -31,6 +32,10 @@ const router = createRouter({
         {
             path: "/draw",
             component: DrawPanelView
+        },
+        {
+            path: "/reg",
+            component: RegView
         }
     ],
     history: createWebHistory()

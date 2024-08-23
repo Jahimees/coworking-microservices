@@ -2,20 +2,28 @@
 
 import {ref} from "vue";
 
-const username = ref("")
-const rawPassword = ref("")
+const username = ref("sadf")
+const rawPassword = ref("sdf")
 
 async function authorize() {
   const userDto = {
-    username: username,
-    rawPassword: rawPassword
+    username: username.value,
+    rawPassword: rawPassword.value
   }
 
-  const response = await (await fetch("http://localhost:8765/v1/auth",
-      {method: "POST", body: JSON.stringify(userDto)}
+  console.log(userDto)
+  console.log(JSON.stringify(userDto))
+  const response = await (await fetch("http://localhost:8765/auth-service/api/v1/auth",
+      {
+        method: "POST",
+        body: JSON.stringify(userDto),
+        headers: {
+          "Content-Type": "application/json"
+        },
+        crossDomain: true
+      }
   )).json();
 
-  console.log(response)
 }
 
 </script>
@@ -24,11 +32,11 @@ async function authorize() {
   <div class="w-75 p-tb-3em m-t-5em block-center">
     <div class="block-center">
       <div class="lbl-field">Имя пользователя</div>
-      <input name="username" :value="username">
+      <input name="username" v-model="username">
     </div>
     <div class="block-center">
       <div class="lbl-field">Пароль</div>
-      <input name="rawPassword" type="password" :value="rawPassword">
+      <input name="rawPassword" type="password" v-model="rawPassword">
     </div>
     <div>
       <button @click="authorize">Авторизоваться</button>
@@ -42,8 +50,8 @@ async function authorize() {
   font-weight: normal;
   font-style: normal;
   font-family: 'codropsicons';
-  src:url('../fonts/codropsicons/codropsicons.eot');
-  src:url('../fonts/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
+  src: url('../fonts/codropsicons/codropsicons.eot');
+  src: url('../fonts/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
   url('../fonts/codropsicons/codropsicons.woff') format('woff'),
   url('../fonts/codropsicons/codropsicons.ttf') format('truetype'),
   url('../fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');

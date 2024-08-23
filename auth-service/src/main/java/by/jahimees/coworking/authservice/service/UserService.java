@@ -3,6 +3,7 @@ package by.jahimees.coworking.authservice.service;
 import by.jahimees.coworking.authservice.data.User;
 import by.jahimees.coworking.authservice.exception.EmailAlreadyExistsException;
 import by.jahimees.coworking.authservice.exception.NotEnoughRegistrationData;
+import by.jahimees.coworking.authservice.exception.RoleNotFoundException;
 import by.jahimees.coworking.authservice.exception.UsernameAlreadyExistsException;
 import by.jahimees.coworking.authservice.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -13,7 +14,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+
+import static by.jahimees.coworking.authservice.util.Constants.ROLE_USER;
 
 @Data
 @Service
@@ -21,6 +25,7 @@ import java.util.Optional;
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final RoleService roleService;
 
     private Optional<User> findUserByUsername(String username) {
         return userRepository.getUserByUsername(username);
@@ -28,7 +33,7 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public User create(User user) throws UsernameAlreadyExistsException, NotEnoughRegistrationData,
-            EmailAlreadyExistsException {
+            EmailAlreadyExistsException, RoleNotFoundException {
         if (user.getUsername() == null || user.getUsername().isEmpty()
                 || user.getPassword() == null || user.getPassword().isEmpty()
                 || user.getEmail() == null || user.getEmail().isEmpty()) {
@@ -36,6 +41,8 @@ public class UserService implements UserDetailsService {
         }
 
         checkUserExistence(user);
+
+        user.setRoles(List.of(roleService.findByName(ROLE_USER)));
 
         return userRepository.saveAndFlush(user);
     }

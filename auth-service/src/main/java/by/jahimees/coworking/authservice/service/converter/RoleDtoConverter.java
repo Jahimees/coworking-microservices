@@ -1,4 +1,4 @@
-package by.jahimees.coworking.authservice.service;
+package by.jahimees.coworking.authservice.service.converter;
 
 import by.jahimees.coworking.authservice.data.Role;
 import by.jahimees.coworking.authservice.data.dto.RoleDto;
