@@ -4,6 +4,10 @@
     text-align: center;
 }
 
+.inline-block {
+    display: inline-flex;
+}
+
 .m-b-3em {
     margin-bottom: 3em;
 }

@@ -16,6 +16,7 @@ import AuthView from "@/components/views/AuthView.vue";
 import RegView from "@/components/views/RegView.vue";
 import HomeView from "@/components/views/HomeView.vue";
 import DrawPanelView from "@/components/views/DrawPanelView.vue";
+import PersonalAccountView from "@/components/views/PersonalAccountView.vue"
 
 import {createRouter, createWebHistory} from "vue-router";
 
@@ -36,6 +37,10 @@ const router = createRouter({
         {
             path: "/reg",
             component: RegView
+        },
+        {
+            path: "/account",
+            component: PersonalAccountView
         }
     ],
     history: createWebHistory()
