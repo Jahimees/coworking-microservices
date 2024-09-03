@@ -19,6 +19,23 @@ const isOfficeManagement = ref(false)
 
 var prevTarget = isSettings
 
+fetch("http://localhost:8765/user-service/api/v1/test",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      crossDomain: true
+    }
+)
+    .then(async (response) => {
+      console.log(response)
+    })
+    .then((responseJson) => {
+    })
+    .catch((error) => {
+    });
+
 
 onMounted(() => {
 

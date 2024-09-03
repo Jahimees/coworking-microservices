@@ -33,6 +33,8 @@ public class User implements UserDetails {
     private String email;
     @Column(name = "status")
     private String status;
+    @Column(name = "request_id")
+    private String requestId;
 
     @ManyToMany
     @JoinTable(

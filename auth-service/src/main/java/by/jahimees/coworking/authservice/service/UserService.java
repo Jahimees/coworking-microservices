@@ -1,10 +1,8 @@
 package by.jahimees.coworking.authservice.service;
 
 import by.jahimees.coworking.authservice.data.User;
-import by.jahimees.coworking.authservice.exception.EmailAlreadyExistsException;
-import by.jahimees.coworking.authservice.exception.NotEnoughRegistrationData;
-import by.jahimees.coworking.authservice.exception.RoleNotFoundException;
-import by.jahimees.coworking.authservice.exception.UsernameAlreadyExistsException;
+import by.jahimees.coworking.authservice.data.message.ServiceMessage;
+import by.jahimees.coworking.authservice.exception.*;
 import by.jahimees.coworking.authservice.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.Data;
@@ -17,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static by.jahimees.coworking.authservice.constants.MessagingConstants.COMMITED_DB_STATUS;
 import static by.jahimees.coworking.authservice.util.Constants.ROLE_USER;
 
 @Data
@@ -26,10 +25,6 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final RoleService roleService;
-
-    private Optional<User> findUserByUsername(String username) {
-        return userRepository.getUserByUsername(username);
-    }
 
     @Transactional
     public User create(User user) throws UsernameAlreadyExistsException, NotEnoughRegistrationData,
@@ -47,11 +42,35 @@ public class UserService implements UserDetailsService {
         return userRepository.saveAndFlush(user);
     }
 
+    @Transactional
+    public void commit(String requestId) {
+        Optional<User> userOptional = findUserByRequestId(requestId);
+
+        if (userOptional.isEmpty()) {
+            //log error return
+            return;
+        }
+
+        User user = userOptional.get();
+        user.setStatus(COMMITED_DB_STATUS);
+
+
+        userRepository.save(user);
+    }
+
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return findUserByUsername(username).orElseThrow(() ->
                 new UsernameNotFoundException("User not found"));
+    }
+
+    public Optional<User> findUserByRequestId(String requestId) {
+        return userRepository.getUserByRequestId(requestId);
+    }
+
+    private Optional<User> findUserByUsername(String username) {
+        return userRepository.getUserByUsername(username);
     }
 
     private void checkUserExistence(User user) throws UsernameAlreadyExistsException, EmailAlreadyExistsException {
@@ -66,7 +85,6 @@ public class UserService implements UserDetailsService {
         if (userOptional.isPresent()) {
             throw new EmailAlreadyExistsException("User with this email already exists");
         }
-
-        //TODO broker check in user service
     }
+
 }

@@ -13,6 +13,11 @@ spring:
         predicates:
           - Path=/auth-service/api/v1/**
           - Method=POST,GET
+      - id: user-service
+        uri: lb://user-service
+        predicates:
+          - Path=/user-service/api/v1/**
+          - Method=POST,GET,PUT,PATCH,UPDATE
 
 #        metadata:
 #          cors:

@@ -47,7 +47,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                         jwtTokenService.getRolesFromToken(jwt).stream().map(SimpleGrantedAuthority::new).toList());
 
                 SecurityContextHolder.getContext().setAuthentication(token);
-
             }
         }
 

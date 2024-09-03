@@ -9,7 +9,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -49,5 +51,15 @@ public class UserDtoConverter {
         }
 
         return user;
+    }
+
+    public Map<String, Object> convertEntityToMap(User user) {
+        Map<String, Object> params = new HashMap<>();
+
+        params.put("id", user.getId());
+        params.put("email", user.getEmail());
+        params.put("username", user.getUsername());
+
+        return params;
     }
 }
