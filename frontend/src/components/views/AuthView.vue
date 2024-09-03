@@ -69,6 +69,7 @@ function test() {
   <div class="block-center">На главную</div>
   <div class="w-100 p-tb-3em m-t-5em block-center">
     <h1 class="block-center">GoCow Авторизация</h1>
+    <div class="err-field" v-if="wrongCredsErr">Логин и (или) пароль неверные</div>
     <div class="block-center">
       <div class="lbl-field">Имя пользователя</div>
       <input name="username" v-model="username">
@@ -151,5 +152,11 @@ img:hover {
 
 a.block-center:hover {
   background: none;
+}
+
+.err-field {
+  font-family: 'codropsicons';
+  color: #a10000;
+  font-size: 1.3em;
 }
 </style>

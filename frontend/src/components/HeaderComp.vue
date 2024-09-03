@@ -55,9 +55,13 @@ function logout() {
    color: #f9f1e9;
    text-align: center;
    top: 50%;
-   right: 30%;
+   right: 10%;
    -webkit-transform: translate3d(-50%, -50%, 0);
    transform: translate3d(-50%, -50%, 0);
+ }
+
+ img {
+   width: 30vh;
  }
 
  img:hover {
